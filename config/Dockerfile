@@ -6,7 +6,9 @@ ENV PROJECT_PATH=${MAIN_PATH}/project
 
 RUN pip install --upgrade pip
 
-#RUN pip install --upgrade <your-packages>
+RUN pip install --upgrade matplotlib
+RUN pip install --upgrade sklearn
+RUN pip install --upgrade pandas
 
 EXPOSE 8888
 
