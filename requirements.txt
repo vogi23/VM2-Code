@@ -1,0 +1,4 @@
+matplotlib
+sklearn
+pandas
+tensorflow >= 2.0.0
