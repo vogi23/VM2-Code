@@ -12,4 +12,4 @@ EXPOSE 8888
 
 WORKDIR $MAIN_PATH
 
-ENTRYPOINT ["/bin/bash", "-c", "jupyter lab"]
+ENTRYPOINT ["/bin/bash", "-c", "jupyter lab --no-browser"]
