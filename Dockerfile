@@ -6,7 +6,13 @@ ENV MAIN_PATH=/project
 
 COPY ./requirements.txt /tmp/requirements.txt
 
+RUN pip install --upgrade pip
+
 RUN pip install -r /tmp/requirements.txt
+
+RUN apt-get install -y git 
+RUN git clone https://github.com/GPflow/GPflow.git /tmp/GPflow
+RUN pip install /tmp/GPflow  --no-cache-dir
 
 EXPOSE 8888
 
