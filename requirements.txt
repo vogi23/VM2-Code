@@ -1,6 +1,5 @@
 matplotlib
 sklearn
 pandas
-tensorflow < 2.0.0
-keras
+tensorflow == 1.14.0
 GPy
