@@ -2,4 +2,5 @@ matplotlib
 sklearn
 pandas
 tensorflow == 1.14.0
+gpflow == 1.5.1
 GPy
