@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 
 RUN pip install -r /tmp/requirements.txt
 
-RUN apt-get install -y git 
+RUN apt-get update & apt-get install -y git
 
 RUN git clone https://github.com/SheffieldML/PyDeepGP.git /tmp/PyDeepGP
 RUN pip install /tmp/PyDeepGP  --no-cache-dir
