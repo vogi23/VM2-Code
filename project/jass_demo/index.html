@@ -3,16 +3,37 @@
 
 
 <style>
+
+html {
+    height: 100%;
+}
+
 body {
 	text-align:center;
+	height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 	background: linear-gradient(180deg, white, rgb(148,148,148));
-	padding-top:100px;
+	padding-top:50px;
 }
 .card {
 	display:inline-block;
 	width:75;
-	height:274px;
+	height:260px;
 	background-repeat: no-repeat;
+}
+
+#answer,
+#next {
+	margin-top:20px;
+	font-size:20px;
+	padding:10px 20px;
+}
+
+#answerfield span {
+	font-size:20px;
+	font-weight:bold;
 }
 </style>
 <script
@@ -226,7 +247,20 @@ hands = [
 { hand: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], prediction: 'Schaufel', truth: 'Schaufel'}
 ]
 
-global_counter = 0;
+var global_counter = -1;
+
+linear = new URLSearchParams(location.search).has('linear') ? true : false;
+
+function getNextId(){
+	if(linear){
+		global_counter = (global_counter + 1) % hands.length;
+	}else{
+		global_counter = Math.floor(Math.random() * hands.length);
+	}
+	console.log(global_counter);
+	return global_counter;
+}
+
 
 var cards = $('#cards').children();
 var nextButton = $('#next');
@@ -237,6 +271,8 @@ var predictionField = $('#prediction');
 var geschobenField = $('#geschoben');
 
 function next(){
+	
+	global_counter = getNextId();
 	
 	nextButton.hide();
 	answerButton.show();
@@ -281,8 +317,6 @@ function answer(){
 	
 	console.log(hands[global_counter]);
 	predictionField.css('background-color',hands[global_counter].truth == hands[global_counter].prediction ? '#afa': 'faa');
-	
-	global_counter += 1
 }
 
 nextButton.on('click', next);
@@ -335,18 +369,20 @@ next();
 <div class="card" style="background-image:url('33.gif')" id="c33"></div>
 <div class="card" style="background-image:url('34.gif')" id="c34"></div>
 <div class="card" style="background-image:url('35.gif')" id="c35"></div>
-
 </div>
-<div style="height:30px;"><span style="display:inline-block;font-weight:bold;font-size:24px;" id="geschoben">Partner hat geschoben!</span></div>
-<br>
-<br>
 
-<div style="display:inline-block;" id="answerfield"><span style="text-align:left;display:inline-block;width:200px;">Truth: <span id="truth"></span></span><span style="text-align:left;display:inline-block;width:200px;">Prediction: <span id="prediction"></span></span></div>
+<div style="height:30px;"><span style="display:inline-block;font-weight:bold;font-size:24px;color: #dd1122;" id="geschoben">Partner hat geschoben!</span></div>
+
+<div style="text-align:left;display:inline-block;margin-top:23px;width:250px;margin-left:50px;" id="answerfield">
+<span style="display:inline-block;width:120px;">Truth: </span><span id="truth"></span><br>
+<span style="display:inline-block;width:120px;">Prediction: </span><span id="prediction"></span>
+</div>
 
 <br><br>
 
 <input id="answer" value="Show answer" type="button">
-<input id="next" value="Next" type="button"
+<input id="next" value="Next" type="button">
+
 </body>
 
 </html>
